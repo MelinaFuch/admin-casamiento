@@ -1,6 +1,6 @@
 function getImages() {
     fetch(
-      'https://casamiento-production-ffeb.up.railway.app/upload'
+      'https://admin-casamiento-production.up.railway.app/upload'
       // 'http://localhost:3000/upload'
       , { 
       method: 'GET'
@@ -44,7 +44,7 @@ function getImages() {
     const confirmDelete = confirm('¿Estás seguro de que quieres eliminar esta imagen?');
     if (confirmDelete) {
       fetch(
-        `https://casamiento-production-ffeb.up.railway.app/upload/${imageId}`
+        `https://admin-casamiento-production.up.railway.app/upload/${imageId}`
         // `http://localhost:3000/upload/${imageId}`
         , {
         method: 'DELETE',
