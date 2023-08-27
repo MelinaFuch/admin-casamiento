@@ -44,7 +44,7 @@ function getImages() {
     const confirmDelete = confirm('¿Estás seguro de que quieres eliminar esta imagen?');
     if (confirmDelete) {
       fetch(
-        `https://casamiento-production-e973.up.railway.app/${imageId}`
+        `https://casamiento-production-e973.up.railway.app/upload${imageId}`
         // `http://localhost:3000/upload/${imageId}`
         , {
         method: 'DELETE',
