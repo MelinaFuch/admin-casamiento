@@ -1,40 +1,47 @@
 function getImages() {
-    fetch(
-      'https://casamiento-production-e973.up.railway.app/upload'
-      // 'http://localhost:3000/upload'
-      , { 
-      method: 'GET'
-    })
+  fetch('https://casamiento-production-e973.up.railway.app/upload', {
+    method: 'GET'
+  })
     .then(response => response.json())
     .then(data => {
-        
-        if (data.success) {
-          const gallery = document.getElementById('gallery');
-          
-          gallery.innerHTML = '';
+      if (data.success) {
+        const gallery = document.getElementById('gallery');
+
+        gallery.innerHTML = '';
+
+        data.images.reverse(); 
 
         data.images.forEach(image => {
           const imageContainer = document.createElement('div');
           imageContainer.className = 'image-container';
-  
+
+          const loadingIndicator = document.createElement('div');
+          loadingIndicator.className = 'loading-indicator'; 
+          loadingIndicator.textContent = 'Cargando...';
+          imageContainer.appendChild(loadingIndicator);
+
           const imgElement = document.createElement('img');
+          imgElement.onload = () => {
+            imageContainer.removeChild(loadingIndicator); 
+          };
           imgElement.src = image.ruta;
-          
+
           const deleteButton = document.createElement('button');
           deleteButton.textContent = 'x';
           deleteButton.addEventListener('click', () => deleteImage(image._id, imageContainer));
-          
+                    
           imageContainer.appendChild(imgElement);
           imageContainer.appendChild(deleteButton);
-          
+
+          imageContainer.appendChild(imgElement);
           gallery.appendChild(imageContainer);
-        });     
+        });
       } else {
         console.log(data.message);
       }
     })
     .catch(error => console.log(error));
-  }
+}
     
   document.addEventListener('DOMContentLoaded', () => {
     getImages();
